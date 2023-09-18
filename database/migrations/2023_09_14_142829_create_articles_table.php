@@ -17,13 +17,13 @@ return new class extends Migration {
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Category::class)->nullable();
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('feature_image_url')->nullable();
             $table->longText('body')->nullable();
             $table->string('meta_description')->nullable();
             $table->dateTime('published_at')->nullable();
             $table->dateTime('scheduled_for')->nullable();
-            $table->enum('status', ['draft', 'published', 'private', ['preview']])->nullable();
+            $table->enum('status', ['draft', 'published', 'private', 'preview'])->nullable();
             $table->timestamps();
         });
     }
