@@ -112,13 +112,13 @@ class ArticleResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('feature_image_url')->label(__('Image')),
                 Tables\Columns\TextColumn::make(('title'))->label(__('Article Title'))
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('author.name')->label(__('Author'))
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('category.name')->label(__('Category'))
-                    ->numeric()
-                    ->sortable(),
+                // Tables\Columns\TextColumn::make('category.name')->label(__('Category'))
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('published_at')->label(__('Published at'))
                     ->dateTime()
                     ->sortable(),
@@ -131,6 +131,8 @@ class ArticleResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->defaultSort('created_at', 'desc')
+            ->defaultGroup('category.name')
             ->filters([
                 //
             ])
