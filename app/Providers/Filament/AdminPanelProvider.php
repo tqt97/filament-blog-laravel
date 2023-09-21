@@ -2,6 +2,10 @@
 
 namespace App\Providers\Filament;
 
+use App\Livewire\DashboardOverview;
+use App\Livewire\LatestArticles;
+use App\Livewire\LatestCategories;
+use App\Livewire\LatestTags;
 use BezhanSalleh\FilamentLanguageSwitch\FilamentLanguageSwitchPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -45,8 +49,12 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                // Widgets\AccountWidget::class,
+                // Widgets\FilamentInfoWidget::class,
+                // LatestArticles::class,
+                // LatestTags::class,
+                // LatestCategories::class,
+                // DashboardOverview::class
             ])
             ->middleware([
                 EncryptCookies::class,
