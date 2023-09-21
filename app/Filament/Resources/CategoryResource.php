@@ -45,10 +45,13 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('articles_count')->label('Total Article')
+                    ->sortable()
                     ->counts('articles')
                     ->badge()
                     ->alignCenter(),

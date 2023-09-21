@@ -45,8 +45,10 @@ class TagResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->translateLabel(__('name'))
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('articles_count')->label('Total Article')
+                    ->sortable()
                     ->counts('articles')
                     ->badge()
                     ->alignCenter(),

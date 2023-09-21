@@ -134,7 +134,48 @@ class ArticleResource extends Resource
             ->defaultSort('created_at', 'desc')
             ->defaultGroup('category.name')
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('category')
+                    ->relationship('category', 'name'),
+                Tables\Filters\SelectFilter::make('author')
+                    ->relationship('author', 'name'),
+                // Tables\Filters\Filter::make('created_at')
+                //     ->form([
+                //         Forms\Components\DatePicker::make('created_from'),
+                //         Forms\Components\DatePicker::make('created_until'),
+                //     ])
+                //     ->query(function (Builder $query, array $data): Builder {
+                //         return $query
+                //             ->when(
+                //                 $data['created_from'],
+                //                 fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                //             )
+                //             ->when(
+                //                 $data['created_until'],
+                //                 fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                //             );
+                //     })
+                Tables\Filters\Filter::make('created_from')
+                    ->form([
+                        Forms\Components\DatePicker::make('created_from'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['created_from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                            );
+                    }),
+                Tables\Filters\Filter::make('created_until')
+                    ->form([
+                        Forms\Components\DatePicker::make('created_until'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['created_until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                            );
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
