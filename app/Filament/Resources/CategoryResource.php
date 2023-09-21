@@ -23,6 +23,13 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationGroup = 'Blog';
 
+    protected static ?int $navigationSort = 2;
+
+    public static function getNavigationBadge(): ?string
+    {
+        return Category::all()->count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form

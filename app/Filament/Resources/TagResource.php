@@ -23,6 +23,14 @@ class TagResource extends Resource
 
     protected static ?string $navigationGroup = 'Blog';
 
+    protected static ?int $navigationSort = 3;
+
+    public static function getNavigationBadge(): ?string
+    {
+        $rs = Tag::all()->count();
+        return $rs > 0 ? $rs : "No item";
+    }
+
     public static function form(Form $form): Form
     {
         return $form
