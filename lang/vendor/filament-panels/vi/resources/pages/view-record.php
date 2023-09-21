@@ -13,5 +13,5 @@ return [
         ],
 
     ],
-
+    'Article Title' => 'Tiêu đề bài viết 1',
 ];

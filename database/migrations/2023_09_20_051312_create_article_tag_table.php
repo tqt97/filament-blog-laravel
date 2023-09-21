@@ -14,8 +14,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('article_tag', function (Blueprint $table) {
-            $table->foreignIdFor(Article::class)->constrained();
-            $table->foreignIdFor(Tag::class)->constrained();
+            $table->foreignIdFor(Article::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Tag::class)->constrained()->onDelete('cascade');
+
+            // $table->foreign('article_id')->references('id')->constrained()->on('articles')->onDelete('cascade');
+            // $table->foreign('article_id')->references('id')->constrained()->on('articles');
+
+            // $table->foreignId('article_id')->constrained()->onDelete('cascade');
+            // $table->foreignId('tag_id')->constrained()->onDelete('cascade');
         });
     }
 
