@@ -30,6 +30,8 @@ class CategoryResource extends Resource
         return Category::all()->count();
     }
 
+    protected static ?string $recordTitleAttribute = 'name';
+
     public static function form(Form $form): Form
     {
         return $form

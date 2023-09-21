@@ -37,6 +37,14 @@ class ArticleResource extends Resource
         return Article::all()->count() ?? "No item";
     }
 
+    protected static ?string $recordTitleAttribute = 'title';
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['title', 'summary', 'body', 'tags.name'];
+    }
+
+    protected static int $globalSearchResultsLimit = 5;
 
     public static function form(Form $form): Form
     {
