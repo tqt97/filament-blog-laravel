@@ -30,12 +30,12 @@ class CategoryResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255)
-                ->unique(ignoreRecord: true)
-                ->live(debounce: 500)
-                ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                    ->unique(ignoreRecord: true)
+                    ->live(debounce: 500)
+                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 Forms\Components\TextInput::make('slug')
                     ->required()
-                ->unique(ignoreRecord: true)
+                    ->unique(ignoreRecord: true)
                     ->maxLength(255),
             ]);
     }
@@ -48,6 +48,10 @@ class CategoryResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('articles_count')->label('Total Article')
+                    ->counts('articles')
+                    ->badge()
+                    ->alignCenter(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

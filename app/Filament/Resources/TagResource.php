@@ -31,7 +31,7 @@ class TagResource extends Resource
                     ->unique(ignoreRecord: true)
                     ->required()
                     ->maxLength(255)
-                    ->live(debounce:500)
+                    ->live(debounce: 500)
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
                 Forms\Components\TextInput::make('slug')
                     ->unique(ignoreRecord: true)
@@ -43,8 +43,13 @@ class TagResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([Tables\Columns\TextColumn::make('name')->translateLabel(__('name'))
-                ->searchable(),
+            ->columns([
+                Tables\Columns\TextColumn::make('name')->translateLabel(__('name'))
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('articles_count')->label('Total Article')
+                    ->counts('articles')
+                    ->badge()
+                    ->alignCenter(),
             ])
             ->filters([
                 //
